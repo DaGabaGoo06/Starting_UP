@@ -1,0 +1,17 @@
+download MySQL => https://dev.mysql.com/downloads/installer/
+
+
+
+download Laragon => https://laragon.app/download
+after downloading add the files from GitHub on C:\laragon\www
+
+
+
+add the MySQL bin Files in the "Edit system Variables", Path directory: Screenshot 2026-05-06 171125
+
+
+
+Copy/ Download the Database => start_systems
+
+
+
