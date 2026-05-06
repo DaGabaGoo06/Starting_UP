@@ -149,7 +149,7 @@ include "config.php";
                         echo "<td>".$row["Email"]."</td>";
 
                         echo "<td>
-                                <a href='delete_investor.php?id=".$row["UserID"]."' 
+                                <a href='delete_user.php?id=".$row["UserID"]."' 
                                    class='btn btn-danger btn-sm'
                                    onclick='return confirm(\"Delete this investor?\")'>
                                    Delete

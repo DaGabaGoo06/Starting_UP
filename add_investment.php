@@ -2,32 +2,37 @@
 session_start();
 include "config.php";
 
-// allow both admin and investor
-if (!isset($_SESSION["role"])) {
-    header("Location: index.php");
+// 🔒 allow only admin or investor
+if (!isset($_SESSION["user_id"])) {
+    header("Location: login.php");
     exit();
 }
 
-// investor is always logged-in user
-$user_id = $_SESSION["user_id"];
-
+// ===============================
+// HANDLE FORM SUBMIT
+// ===============================
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    $investor_id = $_POST["investor_id"];
     $startup_id = $_POST["startup_id"];
     $amount = $_POST["amount"];
 
     $sql = "INSERT INTO Investments (investor_ID, startup_ID, Amount, Date)
-            VALUES ($user_id, $startup_id, $amount, NOW())";
+            VALUES ($investor_id, $startup_id, $amount, NOW())";
 
-    $conn->query($sql);
+    if ($conn->query($sql)) {
 
-    // redirect based on role
-    if ($_SESSION["role"] == "investitor") {
-        header("Location: investor.php?msg=invested");
+        // redirect based on role
+        if ($_SESSION["role"] == "investitor") {
+            header("Location: investor.php?msg=invested");
+        } else {
+            header("Location: admin.php?msg=invested");
+        }
+        exit();
+
     } else {
-        header("Location: admin.php?msg=invested");
+        $error = "Error: " . $conn->error;
     }
-    exit();
 }
 ?>
 
@@ -46,28 +51,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <h3>Make Investment</h3>
 
+        <?php
+        if (isset($error)) {
+            echo "<div class='alert alert-danger'>$error</div>";
+        }
+        ?>
+
         <form method="POST">
 
-            <!-- ONLY STARTUP CHOICE -->
+            <!-- INVESTOR SELECT (ADMIN ONLY CONTROL) -->
+            <?php if ($_SESSION["role"] == "admin") { ?>
+                <div class="mb-3">
+                    <label>Select Investor</label>
+                    <select name="investor_id" class="form-control" required>
+
+                        <?php
+                        $res = $conn->query("SELECT * FROM Users WHERE Role='investitor'");
+                        while($row = $res->fetch_assoc()) {
+                            echo "<option value='{$row['UserID']}'>
+                                    {$row['Name']} {$row['Last_Name']}
+                                  </option>";
+                        }
+                        ?>
+
+                    </select>
+                </div>
+            <?php } else { ?>
+                <!-- INVESTOR AUTO-ASSIGN -->
+                <input type="hidden" name="investor_id" value="<?php echo $_SESSION['user_id']; ?>">
+            <?php } ?>
+
+            <!-- STARTUP SELECT -->
             <div class="mb-3">
                 <label>Select Startup</label>
                 <select name="startup_id" class="form-control" required>
+
                     <?php
                     $res = $conn->query("SELECT * FROM Startups");
                     while($row = $res->fetch_assoc()) {
-                        echo "<option value='{$row['id']}'>{$row['startup_Name']}</option>";
+                        echo "<option value='{$row['id']}'>
+                                {$row['startup_Name']}
+                              </option>";
                     }
                     ?>
+
                 </select>
             </div>
 
             <!-- AMOUNT -->
             <div class="mb-3">
-                <label>Amount</label>
+                <label>Amount (€)</label>
                 <input type="number" name="amount" class="form-control" required>
             </div>
 
-            <button class="btn btn-success">Invest</button>
+            <button class="btn btn-success w-100">Invest</button>
 
         </form>
 
