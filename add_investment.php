@@ -2,15 +2,13 @@
 session_start();
 include "config.php";
 
-// 🔒 allow only admin or investor
+
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
     exit();
 }
 
-// ===============================
-// HANDLE FORM SUBMIT
-// ===============================
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $investor_id = $_POST["investor_id"];
@@ -22,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($conn->query($sql)) {
 
-        // redirect based on role
+        
         if ($_SESSION["role"] == "investitor") {
             header("Location: investor.php?msg=invested");
         } else {
@@ -59,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <form method="POST">
 
-            <!-- INVESTOR SELECT (ADMIN ONLY CONTROL) -->
+            
             <?php if ($_SESSION["role"] == "admin") { ?>
                 <div class="mb-3">
                     <label>Select Investor</label>
@@ -77,11 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </select>
                 </div>
             <?php } else { ?>
-                <!-- INVESTOR AUTO-ASSIGN -->
+                
                 <input type="hidden" name="investor_id" value="<?php echo $_SESSION['user_id']; ?>">
             <?php } ?>
 
-            <!-- STARTUP SELECT -->
+            
             <div class="mb-3">
                 <label>Select Startup</label>
                 <select name="startup_id" class="form-control" required>
@@ -98,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </select>
             </div>
 
-            <!-- AMOUNT -->
+            
             <div class="mb-3">
                 <label>Amount (€)</label>
                 <input type="number" name="amount" class="form-control" required>

@@ -2,7 +2,7 @@
 session_start();
 include "config.php";
 
-// optional: protect page (only admin can add investors)
+
 if (!isset($_SESSION["role"]) || $_SESSION["role"] != "admin") {
     header("Location: index.php");
     exit();
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // simple protection against SQL issues
+    
     $name = $conn->real_escape_string($name);
     $last_name = $conn->real_escape_string($last_name);
     $email = $conn->real_escape_string($email);
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             VALUES ('$name', '$last_name', '$email', '$password', 'investitor')";
 
     if ($conn->query($sql) === TRUE) {
-        // IMPORTANT: always return to admin dashboard
+        
         header("Location: admin.php?msg=investor_added");
         exit();
     } else {

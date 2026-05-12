@@ -24,10 +24,10 @@ include "config.php";
     <title>Startup Monitoring System</title>
     
 
-    <!-- Bootstrap -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Fix table behavior -->
+    
     <style>
         table {
             width: 100%;
@@ -40,10 +40,10 @@ include "config.php";
 
 <div class="container mt-5">
 
-    <!-- Title -->
+    
     <h1 class="text-center mb-4">Startup Monitoring System</h1>
 
-    <!-- Navigation -->
+    
     <div class="mb-4 text-center">
         <a href="admin.php" class="btn btn-primary">Home</a>
         <a href="add_startup.php" class="btn btn-success">Add Startup</a>
@@ -52,9 +52,7 @@ include "config.php";
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
 
-    <!-- ========================= -->
-    <!-- STARTUPS -->
-    <!-- ========================= -->
+    
 
     <div class="card shadow mb-4">
         <div class="card-header bg-dark text-white">
@@ -112,9 +110,7 @@ include "config.php";
         </div>
     </div>
 
-    <!-- ========================= -->
-    <!-- INVESTORS -->
-    <!-- ========================= -->
+    
 
     <div class="card shadow mb-4">
         <div class="card-header bg-primary text-white">
@@ -170,9 +166,7 @@ include "config.php";
         </div>
     </div>
 
-    <!-- ========================= -->
-    <!-- INVESTMENTS -->
-    <!-- ========================= -->
+    
 
     <div class="card shadow mb-4">
         <div class="card-header bg-warning text-dark">

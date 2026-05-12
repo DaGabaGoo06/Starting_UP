@@ -2,7 +2,7 @@
 session_start();
 include "config.php";
 
-// 🔒 ONLY STARTUP USERS ALLOWED
+
 if (!isset($_SESSION["user_id"]) || $_SESSION["role"] != "startup") {
     header("Location: login.php");
     exit();
@@ -10,23 +10,23 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] != "startup") {
 
 $user_id = $_SESSION["user_id"];
 
-// ✅ CHECK IF USER ALREADY HAS A STARTUP
+
 $check = $conn->query("SELECT * FROM Startups WHERE owner_id = $user_id");
 
 if ($check->num_rows > 0) {
-    // already has startup → go to dashboard
+    
     header("Location: startup.php");
     exit();
 }
 
-// 🚀 CREATE STARTUP
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $name = $_POST["startup_Name"];
     $industry = $_POST["Industry"];
     $description = $_POST["Description"];
 
-    // basic protection
+    
     $name = $conn->real_escape_string($name);
     $industry = $conn->real_escape_string($industry);
     $description = $conn->real_escape_string($description);
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             VALUES ('$name', '$industry', '$description', '$user_id')";
 
     if ($conn->query($sql)) {
-        // ✅ GO TO DASHBOARD AFTER CREATION
+        
         header("Location: startup.php");
         exit();
     } else {

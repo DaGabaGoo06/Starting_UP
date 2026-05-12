@@ -2,7 +2,7 @@
 session_start();
 include "config.php";
 
-// SUCCESS MESSAGE AFTER REGISTER
+
 if (isset($_GET['msg']) && $_GET['msg'] == "registered") {
     echo "<div class='alert alert-success text-center'>Account created successfully. Please login.</div>";
 }
@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // 🔐 GET USER BY EMAIL ONLY
+    
     $sql = "SELECT * FROM Users WHERE Email='$email'";
     $result = $conn->query($sql);
 
@@ -22,10 +22,10 @@ $result = $conn->query($sql);
 if ($result->num_rows == 1) {
     $user = $result->fetch_assoc();
 
-    // ✅ CHECK BOTH TYPES
+    
     if (
-        $password === $user["Password"] || // old plain text
-        password_verify($password, $user["Password"]) // new hashed
+        $password === $user["Password"] || 
+        password_verify($password, $user["Password"]) 
     ) {
 
         $_SESSION["user_id"] = $user["UserID"];
@@ -86,7 +86,7 @@ if ($result->num_rows == 1) {
 
         </form>
 
-        <!-- 🔥 SIGN UP LINK -->
+        
         <div class="text-center mt-3">
             <a href="register.php">Don't have an account? Sign up</a>
         </div>

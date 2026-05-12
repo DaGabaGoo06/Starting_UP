@@ -19,7 +19,7 @@ if ($_SESSION["role"] != "investitor") {
 
 <div class="container mt-5">
 
-    <!-- Header -->
+    
     <div class="d-flex justify-content-between align-items-center mb-4">
 
     <div>
@@ -27,13 +27,13 @@ if ($_SESSION["role"] != "investitor") {
         <small class="text-muted">Investor Dashboard</small>
     </div>
 
-    <!-- LOGOUT BUTTON -->
+    
     <a href="logout.php" class="btn btn-danger">
         Logout
     </a>
 
 </div>
-    <!-- Startups Cards -->
+    
     <div class="row">
 
     <?php
@@ -57,7 +57,7 @@ if ($_SESSION["role"] != "investitor") {
 
                     <br><br>
 
-                    <!-- INVEST BUTTON -->
+                    
                     <a href="add_investment.php?startup_id=<?php echo $row["id"]; ?>" 
                        class="btn btn-success btn-sm">
                        Invest

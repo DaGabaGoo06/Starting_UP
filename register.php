@@ -11,35 +11,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     $role = $_POST["role"];
 
-    // escape input
+    
     $name = $conn->real_escape_string($name);
     $last_name = $conn->real_escape_string($last_name);
     $email = $conn->real_escape_string($email);
     $role = $conn->real_escape_string($role);
 
-    // 🔐 HASH PASSWORD
+    
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    // ✅ CHECK IF EMAIL EXISTS
+    
     $check = $conn->query("SELECT * FROM Users WHERE Email='$email'");
     if ($check->num_rows > 0) {
         $error = "Email already exists!";
     } else {
 
-        // INSERT USER
+        
         $sql = "INSERT INTO Users (Name, Last_Name, Email, Password, Role)
                 VALUES ('$name', '$last_name', '$email', '$password', '$role')";
 
         if ($conn->query($sql) === TRUE) {
 
-            // 🔥 AUTO LOGIN
+            
             $user_id = $conn->insert_id;
 
             $_SESSION["user_id"] = $user_id;
             $_SESSION["role"] = $role;
             $_SESSION["name"] = $name;
 
-            // 🚀 REDIRECT BASED ON ROLE
+            
             if ($role == "startup") {
                 header("Location: add_startup.php");
             } elseif ($role == "investitor") {

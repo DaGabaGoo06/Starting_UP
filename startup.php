@@ -21,14 +21,14 @@ $user_id = $_SESSION["user_id"];
 
 <div class="container mt-5">
 
-    <!-- HEADER -->
+    
     <div class="card shadow mb-4">
         <div class="card-body text-center">
 
             <h2>🚀 Welcome, <?php echo $_SESSION["name"]; ?></h2>
             <p class="text-muted">Startup Dashboard</p>
 
-            <!-- ACTION BUTTONS -->
+            
             <div class="d-flex justify-content-center gap-2 mt-3">
 
                 <a href="add_startup.php" class="btn btn-success">
@@ -44,7 +44,7 @@ $user_id = $_SESSION["user_id"];
         </div>
     </div>
 
-    <!-- YOUR STARTUPS -->
+    
     <div class="card shadow mb-4">
         <div class="card-header bg-primary text-white">
             <h5 class="mb-0">Your Startups</h5>
@@ -74,7 +74,7 @@ $user_id = $_SESSION["user_id"];
         </div>
     </div>
 
-    <!-- INVESTMENTS -->
+    
     <div class="card shadow mb-4">
         <div class="card-header bg-dark text-white">
             <h5 class="mb-0">Investments in Your Startups</h5>

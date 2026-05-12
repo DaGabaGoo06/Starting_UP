@@ -2,7 +2,7 @@
 session_start();
 include "config.php";
 
-// 🔒 ONLY ADMIN
+
 if (!isset($_SESSION["user_id"]) || $_SESSION["role"] != "admin") {
     header("Location: login.php");
     exit();
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST["Description"];
     $owner_id = $_POST["owner_id"];
 
-    // basic safety
+    
     $name = $conn->real_escape_string($name);
     $industry = $conn->real_escape_string($industry);
     $description = $conn->real_escape_string($description);
@@ -55,25 +55,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <form method="POST">
 
-            <!-- STARTUP NAME -->
+            
             <div class="mb-3">
                 <label>Startup Name</label>
                 <input type="text" name="startup_Name" class="form-control" required>
             </div>
 
-            <!-- INDUSTRY -->
+            
             <div class="mb-3">
                 <label>Industry</label>
                 <input type="text" name="Industry" class="form-control" required>
             </div>
 
-            <!-- DESCRIPTION -->
+            
             <div class="mb-3">
                 <label>Description</label>
                 <textarea name="Description" class="form-control" required></textarea>
             </div>
 
-            <!-- OWNER SELECT -->
+            
             <div class="mb-3">
                 <label>Assign Owner (Startup User)</label>
                 <select name="owner_id" class="form-control" required>

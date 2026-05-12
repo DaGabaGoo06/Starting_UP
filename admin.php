@@ -2,7 +2,7 @@
 session_start();
 include "config.php";
 
-// 🔒 ADMIN ONLY ACCESS
+
 if (!isset($_SESSION["role"]) || $_SESSION["role"] != "admin") {
     header("Location: login.php");
     exit();
@@ -22,14 +22,14 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] != "admin") {
 
     <h2 class="text-center mb-4">Admin Dashboard</h2>
 
-    <!-- SUCCESS MESSAGE -->
+   
     <?php
     if (isset($_GET['msg'])) {
         echo "<div class='alert alert-success text-center'>Action completed successfully</div>";
     }
     ?>
 
-    <!-- NAVIGATION -->
+    
     <div class="text-center mb-4">
         <a href="admin_add_startup.php" class="btn btn-success">Add Startup</a>
         <a href="add_investor.php" class="btn btn-primary">Add Investor</a>
@@ -38,7 +38,7 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] != "admin") {
     </div>
 
 
-<!-- ================= USERS (STARTUP OWNERS) ================= -->
+
 <div class="card shadow mb-4">
     <div class="card-header bg-secondary text-white">Startup Users</div>
     <div class="card-body table-responsive">
@@ -81,7 +81,7 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] != "admin") {
 
 
 
-    <!-- ================= STARTUPS ================= -->
+    
     <div class="card shadow mb-4">
         <div class="card-header bg-dark text-white">Startups</div>
         <div class="card-body table-responsive">
@@ -122,7 +122,7 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] != "admin") {
         </div>
     </div>
 
-    <!-- ================= INVESTORS ================= -->
+    
     <div class="card shadow mb-4">
         <div class="card-header bg-primary text-white">Investors</div>
         <div class="card-body table-responsive">
@@ -161,7 +161,7 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] != "admin") {
         </div>
     </div>
 
-    <!-- ================= INVESTMENTS ================= -->
+    
     <div class="card shadow mb-4">
         <div class="card-header bg-warning">Investments</div>
         <div class="card-body table-responsive">
